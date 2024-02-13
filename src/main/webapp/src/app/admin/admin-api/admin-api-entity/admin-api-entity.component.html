@@ -1,0 +1,8 @@
+<div class="ext-api-root-div">
+  <ext-api-item
+    [entityMeta]="entityMeta"
+    [entity]="entity$ | async"
+    (back)="onBack()"
+    (save)="onSave($event)"
+  ></ext-api-item>
+</div>

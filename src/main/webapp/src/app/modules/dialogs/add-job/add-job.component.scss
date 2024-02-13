@@ -1,0 +1,51 @@
+.price-list {
+  border-radius: 4px;
+  border: 1px solid #eee;
+  padding: 10px 5px;
+  margin-bottom: 25px;
+  background: #fafafa;
+
+  .mat-list-item {
+    font-size: 14px;
+    height: 36px;
+    justify-content: space-between;
+
+    .mat-list-item-content {
+      padding: 0;
+    }
+
+    span {
+      margin-left: auto;
+    }
+  }
+}
+
+.comment {
+  text-align: right;
+  margin-bottom: 20px;
+
+  .old-comment {
+    .comment-text {
+      font-size: 14px;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .sub-comment {
+      font-size: 12px;
+      color: #4c4c4c;
+      margin-top: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .comment {
+    .well {
+      .mat-button {
+        width: 100%;
+      }
+    }
+  }
+}

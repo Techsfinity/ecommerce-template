@@ -1,0 +1,158 @@
+<div class="modal-head">
+    <h1 mat-dialog-title *ngIf="!job">Add Job</h1>
+    <h1 mat-dialog-title *ngIf="job">Job No (#{{job.id}})</h1>
+    <span class="tag completed" *ngIf="job">{{job.status}}</span>
+</div>
+<div mat-dialog-content>
+
+    <form [formGroup]="jobFormGroup">
+
+        <div class="form-group-horiz">
+            <mat-form-field appearance="outline">
+                <mat-label>Job Name</mat-label>
+                <input matInput placeholder="Job Name" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group-horiz">
+            <mat-form-field appearance="outline">
+                <mat-label>Job Type</mat-label>
+                <mat-select formControlName="jobType">
+                    <mat-option *ngFor="let type of jobTypes" [value]="type.name">
+                        {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Finish Date</mat-label>
+                <input matInput [matDatepicker]="picker" [min]="minDate" (click)="picker.open()"
+                    placeholder="Finish date" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <!-- <mat-divider class="divider"></mat-divider> -->
+
+        <div class="form-group-horiz">
+            <mat-form-field appearance="outline">
+                <mat-label>Customer Name</mat-label>
+                <input matInput placeholder="Customer Name" formControlName="customerName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input matInput placeholder="Customer Phone" formControlName="customerPhone">
+            </mat-form-field>
+        </div>
+
+        <!-- <mat-divider class="divider"></mat-divider> -->
+
+        <p class="form-title">Product Info</p>
+
+        <div class="form-group-horiz" *ngFor="let category of categories; let i=index;" formArrayName="products">
+            <div class="product-form" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{category.name}}</mat-label>
+                    <input type="text" placeholder="Select {{category.name}}" matInput
+                        (keyup)="searchProducts($event, category.name)" [matAutocomplete]="auto" formControlName="name"
+                        (click)="onCategoryClick(category.name)" (focusout)="onCategoryClose()">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let product of products; let j=index;" [value]="product.name"
+                            (onSelectionChange)="addPrice(i, product.price)">
+                            {{product.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="qty">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" [min]="0" placeholder="Quantity" formControlName="quantity">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-group-horiz">
+            <div class="product-form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Extra costs</mat-label>
+                    <input matInput type="text" placeholder="Extra costs" formControlName="extraCostName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="qty">
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="number" [min]="0" placeholder="Extra Cost" formControlName="extraCost">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <p class="form-title">Product Summary</p>
+        <mat-list class="price-list">
+            <div *ngFor="let prod of jobFormGroup.controls['products'].value;let i=index;">
+                <mat-list-item *ngIf="prod.name">{{prod.name}} ({{prod.quantity}} {{prod.unit}}) <span>{{prod.unitPrice}} * {{prod.quantity}}</span>
+                </mat-list-item>
+            </div>
+            <mat-list-item *ngIf="jobFormGroup.controls['extraCost'].value > 0">{{jobFormGroup.controls['extraCostName'].value}}
+                <span>{{jobFormGroup.controls['extraCost'].value}}</span></mat-list-item>
+        </mat-list>
+
+
+        <p class="form-title">Add payment</p>
+        <div class="form-group-horiz">
+            <mat-form-field appearance="outline">
+                <mat-label>Advance Payment</mat-label>
+                <input matInput type="number" [min]="0" placeholder="Advance Payment" formControlName="advance">
+            </mat-form-field>
+        </div>
+
+        <p class="form-title">Payments</p>
+
+        <mat-list class="price-list">
+            <mat-list-item class="">Sub Total (LKR)
+                <span>{{(total + jobFormGroup.controls['extraCost'].value)}}</span></mat-list-item>
+            <mat-list-item>Advance Payments <span>{{jobFormGroup.controls['advance'].value}}</span></mat-list-item>
+            <mat-list-item class="bold">Balance (LKR)
+                <span>{{((total + jobFormGroup.controls['extraCost'].value) - jobFormGroup.controls['advance'].value)}}</span>
+            </mat-list-item>
+        </mat-list>
+
+        <p class="form-title">Remarks</p>
+
+        <div class="form-group-horiz">
+            <mat-form-field appearance="outline">
+                <mat-label>Remarks</mat-label>
+                <input matInput placeholder="Remarks" formControlName="remarks">
+            </mat-form-field>
+        </div>
+
+        <p class="form-title">Comments</p>
+
+        <div class="comment">
+            <div class="old-comment" *ngFor="let comment of job?.comments">
+                <div class="comment-text">
+                    <p><b>{{comment.userName}}</b> => {{comment.description}}</p>
+                    <p class="sub-comment">{{comment.date | date: 'medium'}}</p>
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <textarea matInput placeholder="Add new comment" formControlName="comment"></textarea>
+                </mat-form-field>
+                <button mat-button color="green" [disabled]="!job" (click)="addComment()">Add</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="close()">Close</button>
+    <button *ngFor="let status of jobStatues" mat-flat-button color="primary" cdkFocusInitial
+        (click)="changeJobStatus(status)">{{status.name}}</button>
+    <button *ngIf="job?.id" mat-flat-button color="primary" cdkFocusInitial (click)="updateJobDetails()">Update
+        Job</button>
+    <button *ngIf="!job?.id" mat-flat-button color="primary" cdkFocusInitial (click)="onAddJob()">Add Job</button>
+</div>

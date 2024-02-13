@@ -1,0 +1,13 @@
+<div class="card" (click)="editProduct(product)">
+  <div class="card-image">
+    <img width="400" height="300" src="{{images[0]?.url}}">
+  </div>
+  <div class="card-content">
+    <p class="job-title">{{product?.name}} ({{product?.code}})</p>
+    <!--<p class="job-desc">{{product?.description}}</p>-->
+    <div class="card-foot">
+      <p class="date">{{product?.category}}</p>
+      <span class="tag completed">{{product?.quantity}}</span>
+    </div>
+  </div>
+</div>

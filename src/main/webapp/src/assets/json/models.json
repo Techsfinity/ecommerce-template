@@ -1,0 +1,404 @@
+{
+  "product" : {
+    "name" : "product",
+    "displayName" : "Product",
+    "url" : "products",
+    "properties" : [ {
+      "name" : "name",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "quantity",
+      "type" : "number",
+      "reference" : "number"
+    }, {
+      "name" : "price",
+      "type" : "number",
+      "reference" : "number"
+    }, {
+      "name" : "unit",
+      "type" : "string"
+    }, {
+      "name" : "description",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "name" : "code",
+      "type" : "string"
+    }, {
+      "name" : "category",
+      "type" : "object",
+      "relationShipType" : "SINGLE",
+      "reference" : "category"
+    }, {
+      "name" : "images",
+      "type" : "file",
+      "relationShipType" : "MULTIPLE",
+      "reference" : "list",
+      "embeddedEntityMeta" : {
+        "properties" : [ {
+          "name" : "value",
+          "type" : "string",
+          "reference" : "char[]"
+        }, {
+          "name" : "hash",
+          "type" : "string",
+          "reference" : "int"
+        }, {
+          "name" : "serialVersionUID",
+          "type" : "number",
+          "reference" : "number"
+        }, {
+          "name" : "serialPersistentFields",
+          "type" : "string",
+          "reference" : "objectstreamfield[]"
+        }, {
+          "name" : "CASE_INSENSITIVE_ORDER",
+          "type" : "string",
+          "reference" : "comparator"
+        } ]
+      }
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    } ],
+    "projections" : {
+      "all" : [ {
+        "name" : "quantity",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "code"
+      }, {
+        "name" : "price",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "unit"
+      }, {
+        "name" : "category"
+      }, {
+        "name" : "images"
+      }, {
+        "name" : "description"
+      }, {
+        "name" : "name"
+      }, {
+        "name" : "id",
+        "type" : "number",
+        "reference" : "number"
+      } ],
+      "dataTable" : [ {
+        "name" : "quantity",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "code"
+      }, {
+        "name" : "price",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "unit"
+      }, {
+        "name" : "category"
+      }, {
+        "name" : "name"
+      } ],
+      "basic" : [ {
+        "name" : "quantity",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "price",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "unit"
+      }, {
+        "name" : "category"
+      }, {
+        "name" : "name"
+      } ]
+    }
+  },
+  "role" : {
+    "name" : "role",
+    "displayName" : "Role",
+    "url" : "roles",
+    "properties" : [ {
+      "name" : "name",
+      "required" : true,
+      "max" : 50,
+      "min" : 0,
+      "type" : "string"
+    } ],
+    "projections" : { }
+  },
+  "selectproduct" : {
+    "name" : "selectproduct",
+    "displayName" : "SelectProduct",
+    "url" : "selectProducts",
+    "properties" : [ {
+      "name" : "product",
+      "type" : "object",
+      "relationShipType" : "SINGLE",
+      "reference" : "product"
+    }, {
+      "name" : "quantity",
+      "type" : "number",
+      "reference" : "number"
+    } ],
+    "projections" : {
+      "basic" : [ {
+        "name" : "quantity",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "product"
+      }, {
+        "name" : "id",
+        "type" : "number",
+        "reference" : "number"
+      } ]
+    }
+  },
+  "jobstatus" : {
+    "name" : "jobstatus",
+    "displayName" : "JobStatus",
+    "url" : "jobStatuses",
+    "properties" : [ {
+      "name" : "name",
+      "required" : true,
+      "max" : 50,
+      "min" : 0,
+      "type" : "string"
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    } ],
+    "projections" : { }
+  },
+  "comment" : {
+    "name" : "comment",
+    "displayName" : "Comment",
+    "url" : "comments",
+    "properties" : [ {
+      "name" : "description",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "userName",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "date",
+      "type" : "date"
+    } ],
+    "projections" : { }
+  },
+  "category" : {
+    "name" : "category",
+    "displayName" : "Category",
+    "url" : "categories",
+    "properties" : [ {
+      "name" : "name",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "name" : "products",
+      "mappedBy" : "category",
+      "type" : "set",
+      "iggnoreOnRead" : true,
+      "relationShipType" : "MULTIPLE",
+      "reference" : "product"
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    } ],
+    "projections" : {
+      "basic" : [ {
+        "name" : "products"
+      }, {
+        "name" : "name"
+      } ]
+    }
+  },
+  "job" : {
+    "name" : "job",
+    "displayName" : "Job",
+    "url" : "jobs",
+    "properties" : [ {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "startDate",
+      "type" : "date"
+    }, {
+      "name" : "endDate",
+      "type" : "date"
+    }, {
+      "name" : "status",
+      "type" : "object",
+      "relationShipType" : "SINGLE",
+      "reference" : "jobstatus"
+    }, {
+      "name" : "type",
+      "type" : "object",
+      "relationShipType" : "SINGLE",
+      "reference" : "jobtype"
+    }, {
+      "name" : "customer",
+      "type" : "object",
+      "relationShipType" : "SINGLE",
+      "reference" : "customer"
+    }, {
+      "name" : "comments",
+      "mappedBy" : "",
+      "type" : "list",
+      "iggnoreOnRead" : true,
+      "relationShipType" : "MULTIPLE",
+      "reference" : "comment"
+    }, {
+      "name" : "selectProducts",
+      "type" : "set",
+      "iggnoreOnRead" : true,
+      "relationShipType" : "MULTIPLE",
+      "reference" : "selectproduct"
+    }, {
+      "name" : "remarks",
+      "type" : "string"
+    }, {
+      "name" : "total",
+      "type" : "number",
+      "reference" : "number"
+    }, {
+      "name" : "advance",
+      "type" : "number",
+      "reference" : "number"
+    }, {
+      "name" : "extraCost",
+      "type" : "number",
+      "reference" : "number"
+    }, {
+      "name" : "extraCostName",
+      "type" : "string"
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    } ],
+    "projections" : {
+      "full" : [ {
+        "name" : "status"
+      }, {
+        "name" : "endDate",
+        "type" : "timestamp"
+      }, {
+        "name" : "remarks"
+      }, {
+        "name" : "extraCost",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "advance",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "extraCostName"
+      }, {
+        "name" : "customer"
+      }, {
+        "name" : "comments"
+      }, {
+        "name" : "selectProducts"
+      }, {
+        "name" : "total",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "name"
+      }, {
+        "name" : "id",
+        "type" : "number",
+        "reference" : "number"
+      }, {
+        "name" : "type"
+      } ]
+    }
+  },
+  "user" : {
+    "name" : "user",
+    "displayName" : "User",
+    "url" : "users",
+    "properties" : [ {
+      "name" : "userName",
+      "required" : false,
+      "max" : 50,
+      "min" : 1,
+      "type" : "string"
+    }, {
+      "name" : "email",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "firstName",
+      "type" : "string"
+    }, {
+      "name" : "lastName",
+      "type" : "string"
+    }, {
+      "name" : "mobile",
+      "type" : "string"
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    }, {
+      "name" : "password",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "roles",
+      "type" : "set",
+      "iggnoreOnRead" : true,
+      "relationShipType" : "MULTIPLE",
+      "reference" : "role"
+    } ],
+    "projections" : { }
+  },
+  "jobtype" : {
+    "name" : "jobtype",
+    "displayName" : "JobType",
+    "url" : "jobTypes",
+    "properties" : [ {
+      "name" : "name",
+      "required" : true,
+      "max" : 50,
+      "min" : 0,
+      "type" : "string"
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "reference" : "boolean"
+    } ],
+    "projections" : { }
+  },
+  "customer" : {
+    "name" : "customer",
+    "displayName" : "Customer",
+    "url" : "customers",
+    "properties" : [ {
+      "name" : "name",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "name" : "phone",
+      "type" : "string"
+    } ],
+    "projections" : { }
+  }
+}

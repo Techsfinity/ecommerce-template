@@ -1,0 +1,45 @@
+<div class="content" role="main">
+    <div class="module-header">
+        <div class="mobile-sort-head">
+            <h2>Products</h2>
+
+            <!-- <div class="sort-menu">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>swap_vert</mat-icon> Sort by <span>Date</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>calendar_today</mat-icon>
+                        <span>Date</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>check_box</mat-icon>
+                        <span>Completed</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>search</mat-icon>
+                        <span>Ready</span>
+                    </button>
+                </mat-menu>
+            </div> -->
+        </div>
+
+        <!-- <mat-form-field appearance="outline" class="search">
+            <input matInput type="text" placeholder="Search jobs">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear">x</button>
+        </mat-form-field> -->
+
+        <button mat-flat-button color="primary" (click)="openDialog()">Create Product</button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <app-product-card class="col" *ngFor="let product of products" [product]="product"
+                (delete)="onProductChange()"></app-product-card>
+        </div>
+    </div>
+
+    <mat-paginator [length]="page?.totalElements" [pageSize]="page?.size" [pageSizeOptions]="[10, 20, 50]"
+        (page)="onPageClick($event)">
+    </mat-paginator>
+</div>

@@ -1,0 +1,14 @@
+<div class="card" (click)="editJob(job)">
+  <div class="card-content">
+    <p class="job-title">{{job.name}} (#{{job.id}})</p>
+    <p class="job-desc">{{job?.customer?.name}} ({{job?.customer?.phone}})</p>
+    <!-- <div *ngFor="let p of job.selectProducts">
+      <p class="job-desc">{{p.product.name}}</p>
+    </div> -->
+    <div class="card-foot">
+      <p class="date">{{job.endDate}}</p>
+      <span class="tag completed">{{job.status}}</span>
+    </div>
+  </div>
+  <!--<button class="mat-elevation-z10" mat-flat-button (click)="deleteJob(job)">Delete</button>-->
+</div>

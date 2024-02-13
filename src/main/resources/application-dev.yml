@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  address: localhost
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tusker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    dbcp2:
+      validation-query: SELECT 1
+      test-on-borrow: true
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+        generate_statistics: false
+            
+  profiles:
+    active:
+    - dev

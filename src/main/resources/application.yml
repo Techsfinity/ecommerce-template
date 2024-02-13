@@ -1,0 +1,35 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    rest:
+      base-path: /api
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  jpa:
+    open-in-view: false
+    
+  mail:
+    host: smtp.gmail.com
+    username: flemincosl@gmail.com
+    password: rs#xaxaxaasas
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+  servlet:
+    multipart:
+      max-file-size: 99999999
+      max-request-size: 99999999
+        
+logging:
+  path: data/logs

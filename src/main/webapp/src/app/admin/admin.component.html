@@ -1,0 +1,28 @@
+<div class="admin-container" fxLayout="column">
+  <div class="admin-theme">
+    <mat-toolbar color="primary">
+      <button mat-icon-button matTooltip="Toggle Menu" (click)="matSidenav.toggle()">
+        <mat-icon svgIcon="admin:menu"></mat-icon>
+      </button>
+
+      <p class="tracking-in-expand">Plate&#8482; Admin</p>
+      <span fxFlex></span>
+      <button mat-icon-button matTooltip="LogOut" (click)="logout()">
+        <mat-icon svgIcon="admin:logout"></mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav #matSidenav class="side-nav">
+      <div style="height: 10vh;" fxLayoutAlign="center center">
+        <img src="assets/img/logo.png" height="50px" />
+      </div>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="active" [routerLink]="['api']"><b>API</b></a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

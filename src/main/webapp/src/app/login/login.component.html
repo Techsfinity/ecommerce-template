@@ -1,0 +1,26 @@
+<mat-card class="login-box">
+    <mat-card-content>
+
+        <p class="login-title">Plate Pvt Ltd</p>
+
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline" *ngIf="loginFormGroup.controls['email'] as e">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" formControlName="email" />
+                <mat-error *ngIf="e.hasError('required') && e.touched">Enter username</mat-error>
+                <mat-error *ngIf="e.hasError('minlength')">Invalid username</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="loginFormGroup.controls['password'] as p">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" autocomplete />
+                <mat-error *ngIf="p.hasError('required') && p.touched">Enter the Password</mat-error>
+                <mat-error *ngIf="p.hasError('minlength')">Minimum 4 characters required</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="!loginFormGroup.valid">Login</button>
+
+            <p class="login-credits">© 2020 Plate Pvt Ltd. All Rights Reserved.</p>
+        </form>
+    </mat-card-content>
+</mat-card>
