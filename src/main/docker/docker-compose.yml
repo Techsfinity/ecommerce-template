@@ -16,24 +16,3 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-#      MYSQL_DATABASE: keycloak
-#      MYSQL_USER: keycloak
-#      MYSQL_PASSWORD: password
-#  keycloak:
-#    image: jboss/keycloak:7.0.0
-#    container_name: tusker-keycloak
-#    networks:
-#      - tusker-network
-#    ports:
-#      - 8081:8080
-#    environment:
-#      DB_VENDOR: MYSQL
-#      DB_ADDR: mysql
-#      DB_DATABASE: keycloak
-#      DB_USER: keycloak
-#      DB_PASSWORD: password
-#      KEYCLOAK_USER: admin
-#      KEYCLOAK_PASSWORD: admin
-#      JDBC_PARAMS: "characterEncoding=UTF-8"
-#    depends_on:
-#      - mysql
